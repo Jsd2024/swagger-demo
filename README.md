@@ -35,3 +35,5 @@ http://localhost:8085/api/files/upload
 to 
 
 http://localhost:8085/files/upload
+---SWAGGER UI URL-----
+http://localhost:8091/swagger-ui/index.html
