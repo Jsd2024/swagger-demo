@@ -1,4 +1,4 @@
-package org.hacker.rank.demo;
+package org.swagger.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
