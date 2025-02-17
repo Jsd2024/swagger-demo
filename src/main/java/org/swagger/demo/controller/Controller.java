@@ -6,10 +6,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -27,6 +24,23 @@ public class Controller {
         // Process the file here
         String fileName = file.getOriginalFilename();
         return ResponseEntity.ok("File uploaded successfully: " + fileName);
+    }
+
+    @Operation(summary = "Upload a Text", description = "Upload a Text to the server",
+            requestBody = @RequestBody(content = @Content(mediaType = "application/json")))
+    @ApiResponse(responseCode = "200", description = "Text uploaded successfully")
+    @PostMapping(value = "/text", consumes = "application/json")
+    public ResponseEntity<String> testString(@RequestParam("text") String str) {
+        String textDesc = null;
+        if (str.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Text is empty");
+        }
+        else{
+            if(str.describeConstable().isPresent()) {
+                textDesc =  str.describeConstable().get();
+            }
+        }
+        return ResponseEntity.ok("Text uploaded successfully: " + textDesc);
     }
 }
 
